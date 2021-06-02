@@ -1,15 +1,55 @@
-from mycroft import MycroftSkill, intent_file_handler
+from mycroft import FallbackSkill
+import datetime as dt
+
+        startTime = datetime.datetime(21,55,0)
+        currentTime = date.time.now().time()
+        endTime = datetime.time(23,00,0)
 
 
-class Onsmokeo(MycroftSkill):
+class OnsmokeoFallback(FallbackSkill):
+    """
+     A skill to answer any question asked between
+     11:45am and 12:00pm Monday - Friday
+    """
     def __init__(self):
-        MycroftSkill.__init__(self)
+        super(OnsmokeoFallback, self).__init__(name='Smokeo Fallback Skill')
+        #I want the fallback code to run only at particular times. Do I need to include this 
+        # in the initialisation code here?
 
-    @intent_file_handler('onsmokeo.intent')
-    def handle_onsmokeo(self, message):
-        self.speak_dialog('onsmokeo')
+    def initialize(self):
+    """
+    Registers the fallback handler
+    The fallback handler listents to determine if an Utterance can be handled.
+    I don't want it to listen for utterances. I just want it to respond "I'm on  Smokeo
+    if the user activates Mycroft in a particular time. Does this mean I don't want to use
+    initialize? 
+    """ 
+        self.register_fallback(self.handle_fallback, 99) #Set to 99 so has high priority.
 
+    def IsSmokeoTime():
+    """
+    Defines period when Smokeo happens    
+    """
+     if currentTime >=startTime and <=endTime
+        IsSmokeoTime = True
+        else IsSmokeoTime = False
 
-def create_skill():
-    return Onsmokeo()
+    def handle_fallback(self, message):
+    """
+    Answers any utterance (or no utterance) made between 11:45am and 12:00pm Monday - Friday"
+    """
+    # utterance = message.data.get("utterance") 
+    #have commented this out because don't want fallback to have to wait for utterance. 
+ 
+    if IsSmokeoTime = True
+       self.speak('Im on Smoke O. Do it yourself')
+       return True
+    else:
+       return False 
 
+   def shutdown(self):
+       self.remove_fallback(self.handle_fallback)
+       super(MeaningFallback, self).shutdown()
+   
+   def create_skill():
+       return MeaningFallback() 
