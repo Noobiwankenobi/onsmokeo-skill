@@ -1,7 +1,7 @@
 from mycroft import FallbackSkill
 import datetime as dt
 
-        startTime = datetime.datetime(21,55,0)
+        startTime = datetime.datetime(11,45,0)
         currentTime = date.time.now().time()
         endTime = datetime.time(23,00,0)
 
@@ -49,7 +49,7 @@ class OnsmokeoFallback(FallbackSkill):
 
    def shutdown(self):
        self.remove_fallback(self.handle_fallback)
-       super(MeaningFallback, self).shutdown()
+       super(OnsmokeoFallback, self).shutdown()
    
    def create_skill():
-       return MeaningFallback() 
+       return OnsmokeoFallback() 
